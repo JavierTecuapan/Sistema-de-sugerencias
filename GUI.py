@@ -680,6 +680,884 @@ class Objeto2 ( wx.Frame ):
     def next( self, event ):
         Seleccion_de_Ventanas(3)
         self.Destroy()
+###########################################################################
+## Class Objeto3
+###########################################################################
+
+class Objeto3 ( wx.Frame ):
+    
+    def __init__( self, parent ):
+        wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Sistema de sugerencias", pos = wx.DefaultPosition, size = wx.Size( 683,384 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+        self.Centre(True)
+        self.Show()
+        self.Bind(wx.EVT_CLOSE, self.onClose)
+        self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+        
+        self.m_menubar1 = wx.MenuBar( 0 )
+        self.m_menu1 = wx.Menu()
+        self.m_menuItem1 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Limpiar texto", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem1 )
+        
+        self.m_menuItem2 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Vectorizacion de Modelo", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem2 )
+        
+        self.m_menuItem3 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Matriz del vector", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem3 )
+        
+        self.m_menuItem4 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Generar Modelo", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem4 )
+        
+        self.m_menubar1.Append( self.m_menu1, u"Crear modelo" ) 
+        
+        self.m_menu2 = wx.Menu()
+        self.m_menuItem5 = wx.MenuItem( self.m_menu2, wx.ID_ANY, u"Cargar modelo y clasificar", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu2.AppendItem( self.m_menuItem5 )
+        
+        self.m_menuItem6 = wx.MenuItem( self.m_menu2, wx.ID_ANY, u"Especificaciones de modelo", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu2.AppendItem( self.m_menuItem6 )
+        
+        self.m_menubar1.Append( self.m_menu2, u"Clasificar modelo" ) 
+        
+        self.m_menu3 = wx.Menu()
+        self.m_menuItem7 = wx.MenuItem( self.m_menu3, wx.ID_ANY, u"Teoria basica", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu3.AppendItem( self.m_menuItem7 )
+        
+        self.m_menuItem8 = wx.MenuItem( self.m_menu3, wx.ID_ANY, u"Contacto", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu3.AppendItem( self.m_menuItem8 )
+        
+        self.m_menubar1.Append( self.m_menu3, u"Ayuda" ) 
+        
+        self.SetMenuBar( self.m_menubar1 )
+        
+        gSizer7 = wx.GridSizer( 4, 1, 0, 0 )
+        
+        bSizer14 = wx.BoxSizer( wx.VERTICAL )
+        
+        sbSizer12 = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, u"Interpretacion de datos" ), wx.VERTICAL )
+        
+        self.m_staticText11 = wx.StaticText( sbSizer12.GetStaticBox(), wx.ID_ANY, u"En esta parte del modelo, se van a trabajar con los datos anteriores. Por lo cual solo basta con dar ckick en el boton \"Iniciar proceso\".  Al finalizar mostrara como se crea el vector y se le asigna un valos numerico a las palabra.", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText11.Wrap( -1 )
+        sbSizer12.Add( self.m_staticText11, 1, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        bSizer14.Add( sbSizer12, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer7.Add( bSizer14, 1, wx.EXPAND, 5 )
+        
+        bSizer16 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer16 = wx.GridSizer( 2, 1, 0, 0 )
+        
+        bSizer50 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Palabras = wx.TextCtrl( self, wx.ID_ANY, u"Vector de palabras de modelo", wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer50.Add( self.Palabras, 1, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        gSizer16.Add( bSizer50, 1, wx.EXPAND, 5 )
+        
+        bSizer51 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Caliz = wx.TextCtrl( self, wx.ID_ANY, u"Vector de palabras de texto de prueba", wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer51.Add( self.Caliz, 1, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        gSizer16.Add( bSizer51, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer16.Add( gSizer16, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer7.Add( bSizer16, 1, wx.EXPAND, 5 )
+        
+        bSizer18 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer17 = wx.GridSizer( 2, 2, 0, 0 )
+        
+        bSizer52 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText12 = wx.StaticText( self, wx.ID_ANY, u"Dimension de (documentos,palabras) \"Modelo\"", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText12.Wrap( -1 )
+        bSizer52.Add( self.m_staticText12, 1, wx.ALL|wx.ALIGN_RIGHT, 5 )
+        
+        
+        gSizer17.Add( bSizer52, 1, wx.EXPAND, 5 )
+        
+        bSizer53 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_textCtrl24 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer53.Add( self.m_textCtrl24, 0, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        gSizer17.Add( bSizer53, 1, wx.EXPAND, 5 )
+        
+        bSizer54 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText121 = wx.StaticText( self, wx.ID_ANY, u"Dimension de (documentos,palabras) \"Evaluacion\"", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText121.Wrap( -1 )
+        bSizer54.Add( self.m_staticText121, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+        
+        
+        gSizer17.Add( bSizer54, 1, wx.EXPAND, 5 )
+        
+        bSizer55 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_textCtrl25 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer55.Add( self.m_textCtrl25, 0, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        gSizer17.Add( bSizer55, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer18.Add( gSizer17, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer7.Add( bSizer18, 1, wx.EXPAND, 5 )
+        
+        bSizer19 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer14 = wx.GridSizer( 1, 3, 0, 0 )
+        
+        bSizer40 = wx.BoxSizer( wx.VERTICAL )
+        
+        sbSizer23 = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, u"Estado del programa" ), wx.VERTICAL )
+        
+        self.Porcentaje = wx.TextCtrl( sbSizer23.GetStaticBox(), wx.ID_ANY, u"Esperando ejecucion", wx.DefaultPosition, wx.DefaultSize, 0 )
+        sbSizer23.Add( self.Porcentaje, 0, wx.ALL|wx.EXPAND, 5 )
+        
+        self.Barrita = wx.Gauge( sbSizer23.GetStaticBox(), wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL )
+        self.Barrita.SetValue( 0 ) 
+        sbSizer23.Add( self.Barrita, 0, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        bSizer40.Add( sbSizer23, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer14.Add( bSizer40, 1, wx.EXPAND, 5 )
+        
+        bSizer41 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Iniciar_Proceso = wx.Button( self, wx.ID_ANY, u"Iniciar proceso", wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer41.Add( self.Iniciar_Proceso, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
+        
+        
+        gSizer14.Add( bSizer41, 1, wx.EXPAND, 5 )
+        
+        bSizer42 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Siguiente_proceso = wx.Button( self, wx.ID_ANY, u"Siguiente proceso", wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer42.Add( self.Siguiente_proceso, 1, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        gSizer14.Add( bSizer42, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer19.Add( gSizer14, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer7.Add( bSizer19, 1, wx.EXPAND, 5 )
+        
+        
+        self.SetSizer( gSizer7 )
+        self.Layout()
+        
+        self.Centre( wx.BOTH )
+        
+        # Connect Events
+        self.Bind( wx.EVT_MENU, self.Limpiar_texto, id = self.m_menuItem1.GetId() )
+        self.Bind( wx.EVT_MENU, self.Vectorizacion_modelo, id = self.m_menuItem2.GetId() )
+        self.Bind( wx.EVT_MENU, self.Valor_numerico_vector, id = self.m_menuItem3.GetId() )
+        self.Bind( wx.EVT_MENU, self.Generar_modelo, id = self.m_menuItem4.GetId() )
+        self.Bind( wx.EVT_MENU, self.Clasificar, id = self.m_menuItem5.GetId() )
+        self.Bind( wx.EVT_MENU, self.Especificaciones_modelo, id = self.m_menuItem6.GetId() )
+        self.Bind( wx.EVT_MENU, self.Teoria_basica, id = self.m_menuItem7.GetId() )
+        self.Bind( wx.EVT_MENU, self.Contacto, id = self.m_menuItem8.GetId() )
+        self.Iniciar_Proceso.Bind( wx.EVT_BUTTON, self.Iniciar )
+        self.Siguiente_proceso.Bind( wx.EVT_BUTTON, self.next )
+    
+    def __del__( self ):
+        pass
+    
+    
+# Virtual event handlers, overide them in your derived class
+    def Limpiar_texto( self, event ):
+        Seleccion_de_Ventanas(1)
+        self.Destroy()
+    
+    def Vectorizacion_modelo( self, event ):
+        Seleccion_de_Ventanas(2)
+        self.Destroy()
+    
+    def Valor_numerico_vector( self, event ):
+        Seleccion_de_Ventanas(3)
+        self.Destroy()
+    
+    def Generar_modelo( self, event ):
+        Seleccion_de_Ventanas(4)
+        self.Destroy()
+    
+    def Clasificar( self, event ):
+        Seleccion_de_Ventanas(5)
+        self.Destroy()
+    
+    def Especificaciones_modelo( self, event ):
+        Seleccion_de_Ventanas(6)
+        self.Destroy()
+    
+    def Teoria_basica( self, event ):
+        Seleccion_de_Ventanas(7)
+        self.Destroy()
+    
+    def Contacto( self, event ):
+        Seleccion_de_Ventanas(8)
+        self.Destroy()
+    
+    def onClose(self,event):
+        Mata_Programa_Definitivo(False)
+        print j
+        self.Destroy()
+            
+    def Iniciar( self, event ):
+        self.Porcentaje.SetValue("Iniciando")
+        self.Barrita.SetValue(10)
+        train_data = pickle.load( open( "save1.p", "rb" ) )
+        test_data = pickle.load( open( "save2.p", "rb" ) )
+        target = pickle.load( open( "save3.p", "rb" ) )
+        target2 = pickle.load( open( "save4.p", "rb" ) )
+        self.Porcentaje.SetValue("Iniciando ..")
+        self.Barrita.SetValue(20)
+        train_data = getWordNgrams(train_data, 1)
+        test_data = getWordNgrams(test_data, 1)
+        self.Palabras.SetValue(str(train_data[0]))
+        self.Caliz.SetValue(str(test_data[0]))
+        self.Porcentaje.SetValue("Iniciando ....")
+        self.Barrita.SetValue(40)
+        train,train_tar,test,test_tar,features = parse_corpus(train_data,test_data,target,target2)
+        self.m_textCtrl24.SetValue(str(shape(train)))
+        self.m_textCtrl25.SetValue(str(shape(test)))
+        self.Porcentaje.SetValue("Ya casi ....")
+        self.Barrita.SetValue(80)
+        pickle.dump( train, open( "save5.p", "wb" ) )
+        pickle.dump( train_tar, open( "save6.p", "wb" ) )
+        pickle.dump( test, open( "save7.p", "wb" ) )
+        pickle.dump( test_tar, open( "save8.p", "wb" ) )
+        pickle.dump( features, open( "save9.p", "wb" ) )
+        self.Porcentaje.SetValue("Listo ....")
+        self.Barrita.SetValue(100)
+    def next( self, event ):
+        Seleccion_de_Ventanas(4)
+        self.Destroy()
+
+###########################################################################
+## Class Objeto4
+###########################################################################
+
+class Objeto4 ( wx.Frame ):
+    
+    def __init__( self, parent ):
+        wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Sistema de sugerencias", pos = wx.DefaultPosition, size = wx.Size( 683,384 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+        self.Centre(True)
+        self.Show()
+        self.Bind(wx.EVT_CLOSE, self.onClose)
+        self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+        
+        self.m_menubar1 = wx.MenuBar( 0 )
+        self.m_menu1 = wx.Menu()
+        self.m_menuItem1 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Limpiar texto", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem1 )
+        
+        self.m_menuItem2 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Vectorizacion de Modelo", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem2 )
+        
+        self.m_menuItem3 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Matriz del vector", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem3 )
+        
+        self.m_menuItem4 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Generar Modelo", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem4 )
+        
+        self.m_menubar1.Append( self.m_menu1, u"Crear modelo" ) 
+        
+        self.m_menu2 = wx.Menu()
+        self.m_menuItem5 = wx.MenuItem( self.m_menu2, wx.ID_ANY, u"Cargar modelo y clasificar", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu2.AppendItem( self.m_menuItem5 )
+        
+        self.m_menuItem6 = wx.MenuItem( self.m_menu2, wx.ID_ANY, u"Especificaciones de modelo", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu2.AppendItem( self.m_menuItem6 )
+        
+        self.m_menubar1.Append( self.m_menu2, u"Clasificar modelo" ) 
+        
+        self.m_menu3 = wx.Menu()
+        self.m_menuItem7 = wx.MenuItem( self.m_menu3, wx.ID_ANY, u"Teoria basica", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu3.AppendItem( self.m_menuItem7 )
+        
+        self.m_menuItem8 = wx.MenuItem( self.m_menu3, wx.ID_ANY, u"Contacto", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu3.AppendItem( self.m_menuItem8 )
+        
+        self.m_menubar1.Append( self.m_menu3, u"Ayuda" ) 
+        
+        self.SetMenuBar( self.m_menubar1 )
+        
+        gSizer7 = wx.GridSizer( 4, 1, 0, 0 )
+        
+        bSizer14 = wx.BoxSizer( wx.VERTICAL )
+        
+        sbSizer12 = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, u"Creacion de modelo" ), wx.VERTICAL )
+        
+        gSizer26 = wx.GridSizer( 2, 1, 0, 0 )
+        
+        bSizer82 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText22 = wx.StaticText( sbSizer12.GetStaticBox(), wx.ID_ANY, u"Este proceso puede tardar. Dependiendo cuantos archivos tenga la muestra  y el equipo en el que se corra.", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText22.Wrap( -1 )
+        bSizer82.Add( self.m_staticText22, 0, wx.RIGHT|wx.LEFT|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+        
+        
+        gSizer26.Add( bSizer82, 1, wx.EXPAND, 5 )
+        
+        bSizer83 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer27 = wx.GridSizer( 1, 2, 0, 0 )
+        
+        bSizer84 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText23 = wx.StaticText( sbSizer12.GetStaticBox(), wx.ID_ANY, u"Nombre del modelo:", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText23.Wrap( -1 )
+        bSizer84.Add( self.m_staticText23, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+        
+        
+        gSizer27.Add( bSizer84, 1, wx.EXPAND, 5 )
+        
+        bSizer85 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Nombre_modelo = wx.TextCtrl( sbSizer12.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer85.Add( self.Nombre_modelo, 1, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        gSizer27.Add( bSizer85, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer83.Add( gSizer27, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer26.Add( bSizer83, 1, wx.EXPAND, 5 )
+        
+        
+        sbSizer12.Add( gSizer26, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer14.Add( sbSizer12, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer7.Add( bSizer14, 1, wx.EXPAND, 5 )
+        
+        bSizer16 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer16 = wx.GridSizer( 2, 1, 0, 0 )
+        
+        bSizer50 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText24 = wx.StaticText( self, wx.ID_ANY, u"Clasificacion de modelo atravez de la tecnica LinearSVC", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText24.Wrap( -1 )
+        bSizer50.Add( self.m_staticText24, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+        
+        
+        gSizer16.Add( bSizer50, 1, wx.EXPAND, 5 )
+        
+        bSizer51 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer28 = wx.GridSizer( 1, 2, 0, 0 )
+        
+        bSizer86 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText26 = wx.StaticText( self, wx.ID_ANY, u"Porcentaje de eficiencia: ", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText26.Wrap( -1 )
+        bSizer86.Add( self.m_staticText26, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+        
+        
+        gSizer28.Add( bSizer86, 1, wx.EXPAND, 5 )
+        
+        bSizer87 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Score = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer87.Add( self.Score, 0, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        gSizer28.Add( bSizer87, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer51.Add( gSizer28, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer16.Add( bSizer51, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer16.Add( gSizer16, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer7.Add( bSizer16, 1, wx.EXPAND, 5 )
+        
+        bSizer18 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer161 = wx.GridSizer( 2, 1, 0, 0 )
+        
+        bSizer501 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText241 = wx.StaticText( self, wx.ID_ANY, u"Clasificacion de modelo atravez de la tecnica SVC", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText241.Wrap( -1 )
+        bSizer501.Add( self.m_staticText241, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+        
+        
+        gSizer161.Add( bSizer501, 1, wx.EXPAND, 5 )
+        
+        bSizer511 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer281 = wx.GridSizer( 1, 2, 0, 0 )
+        
+        bSizer861 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText261 = wx.StaticText( self, wx.ID_ANY, u"Porcentaje de eficiencia: ", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText261.Wrap( -1 )
+        bSizer861.Add( self.m_staticText261, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+        
+        
+        gSizer281.Add( bSizer861, 1, wx.EXPAND, 5 )
+        
+        bSizer871 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Score1 = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer871.Add( self.Score1, 0, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        gSizer281.Add( bSizer871, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer511.Add( gSizer281, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer161.Add( bSizer511, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer18.Add( gSizer161, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer7.Add( bSizer18, 1, wx.EXPAND, 5 )
+        
+        bSizer19 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer14 = wx.GridSizer( 1, 3, 0, 0 )
+        
+        bSizer40 = wx.BoxSizer( wx.VERTICAL )
+        
+        sbSizer23 = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, u"Estado del programa" ), wx.VERTICAL )
+        
+        self.Porcentaje = wx.TextCtrl( sbSizer23.GetStaticBox(), wx.ID_ANY, u"Esperando ejecucion", wx.DefaultPosition, wx.DefaultSize, 0 )
+        sbSizer23.Add( self.Porcentaje, 0, wx.ALL|wx.EXPAND, 5 )
+        
+        self.Barrita = wx.Gauge( sbSizer23.GetStaticBox(), wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL )
+        self.Barrita.SetValue( 0 ) 
+        sbSizer23.Add( self.Barrita, 0, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        bSizer40.Add( sbSizer23, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer14.Add( bSizer40, 1, wx.EXPAND, 5 )
+        
+        bSizer41 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Iniciar_Proceso = wx.Button( self, wx.ID_ANY, u"Iniciar proceso", wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer41.Add( self.Iniciar_Proceso, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.EXPAND, 5 )
+        
+        
+        gSizer14.Add( bSizer41, 1, wx.EXPAND, 5 )
+        
+        bSizer42 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Siguiente_proceso = wx.Button( self, wx.ID_ANY, u"Probar modelo", wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer42.Add( self.Siguiente_proceso, 1, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        gSizer14.Add( bSizer42, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer19.Add( gSizer14, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer7.Add( bSizer19, 1, wx.EXPAND, 5 )
+        
+        
+        self.SetSizer( gSizer7 )
+        self.Layout()
+        
+        self.Centre( wx.BOTH )
+        
+        # Connect Events
+        self.Bind( wx.EVT_MENU, self.Limpiar_texto, id = self.m_menuItem1.GetId() )
+        self.Bind( wx.EVT_MENU, self.Vectorizacion_modelo, id = self.m_menuItem2.GetId() )
+        self.Bind( wx.EVT_MENU, self.Valor_numerico_vector, id = self.m_menuItem3.GetId() )
+        self.Bind( wx.EVT_MENU, self.Generar_modelo, id = self.m_menuItem4.GetId() )
+        self.Bind( wx.EVT_MENU, self.Clasificar, id = self.m_menuItem5.GetId() )
+        self.Bind( wx.EVT_MENU, self.Especificaciones_modelo, id = self.m_menuItem6.GetId() )
+        self.Bind( wx.EVT_MENU, self.Teoria_basica, id = self.m_menuItem7.GetId() )
+        self.Bind( wx.EVT_MENU, self.Contacto, id = self.m_menuItem8.GetId() )
+        self.Iniciar_Proceso.Bind( wx.EVT_BUTTON, self.Iniciar )
+        self.Siguiente_proceso.Bind( wx.EVT_BUTTON, self.next )
+    
+    def __del__( self ):
+        pass
+    
+    
+    # Virtual event handlers, overide them in your derived class
+    def Limpiar_texto( self, event ):
+        Seleccion_de_Ventanas(1)
+        self.Destroy()
+    
+    def Vectorizacion_modelo( self, event ):
+        Seleccion_de_Ventanas(2)
+        self.Destroy()
+    
+    def Valor_numerico_vector( self, event ):
+        Seleccion_de_Ventanas(3)
+        self.Destroy()
+    
+    def Generar_modelo( self, event ):
+        Seleccion_de_Ventanas(4)
+        self.Destroy()
+    
+    def Clasificar( self, event ):
+        Seleccion_de_Ventanas(5)
+        self.Destroy()
+    
+    def Especificaciones_modelo( self, event ):
+        Seleccion_de_Ventanas(6)
+        self.Destroy()
+    
+    def Teoria_basica( self, event ):
+        Seleccion_de_Ventanas(7)
+        self.Destroy()
+    
+    def Contacto( self, event ):
+        Seleccion_de_Ventanas(8)
+        self.Destroy()
+    
+    def onClose(self,event):
+        Mata_Programa_Definitivo(False)
+        print j
+        self.Destroy()
+        
+    def Iniciar( self, event ):
+        self.Porcentaje.SetValue("Iniciando programa")
+        self.Barrita.SetValue(10)
+        ruta=self.Nombre_modelo.GetValue()
+        ruta=ruta+".p"
+        train = pickle.load( open( "save5.p", "rb" ) )
+        train_tar = pickle.load( open( "save6.p", "rb" ) )
+        test = pickle.load( open( "save7.p", "rb" ) )
+        test_tar = pickle.load( open( "save8.p", "rb" ) )
+        self.Porcentaje.SetValue("Iniciando programa ..")
+        self.Barrita.SetValue(30)
+        score,score2,liblinear,clf=machineLearning_scikit(train,train_tar,test,test_tar)
+        self.Score.SetValue(str(score*100))
+        self.Score1.SetValue(str(score*100))
+        self.Porcentaje.SetValue("Ya casi ..")
+        self.Barrita.SetValue(80)
+        if score>=score2:
+            pickle.dump( liblinear, open( ruta, "wb" ) )
+        else:
+            pickle.dump( clf, open( ruta, "wb" ) )
+        self.Porcentaje.SetValue("Terminado")
+        self.Barrita.SetValue(100)
+        event.Skip()
+    
+    def next( self, event ):
+        Seleccion_de_Ventanas(5)
+        self.Destroy()
+###########################################################################
+## Class Objeto5
+###########################################################################
+
+class Objeto5 ( wx.Frame ):
+    
+    def __init__( self, parent ):
+        wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Sistema de sugerencias", pos = wx.DefaultPosition, size = wx.Size( 683,384 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+        self.Centre(True)
+        self.Show()
+        self.Bind(wx.EVT_CLOSE, self.onClose)
+        self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
+        
+        self.m_menubar1 = wx.MenuBar( 0 )
+        self.m_menu1 = wx.Menu()
+        self.m_menuItem1 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Limpiar texto", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem1 )
+        
+        self.m_menuItem2 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Vectorizacion de Modelo", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem2 )
+        
+        self.m_menuItem3 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Matriz del vector", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem3 )
+        
+        self.m_menuItem4 = wx.MenuItem( self.m_menu1, wx.ID_ANY, u"Generar Modelo", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu1.AppendItem( self.m_menuItem4 )
+        
+        self.m_menubar1.Append( self.m_menu1, u"Crear modelo" ) 
+        
+        self.m_menu2 = wx.Menu()
+        self.m_menuItem5 = wx.MenuItem( self.m_menu2, wx.ID_ANY, u"Cargar modelo y clasificar", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu2.AppendItem( self.m_menuItem5 )
+        
+        self.m_menuItem6 = wx.MenuItem( self.m_menu2, wx.ID_ANY, u"Especificaciones de modelo", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu2.AppendItem( self.m_menuItem6 )
+        
+        self.m_menubar1.Append( self.m_menu2, u"Clasificar modelo" ) 
+        
+        self.m_menu3 = wx.Menu()
+        self.m_menuItem7 = wx.MenuItem( self.m_menu3, wx.ID_ANY, u"Teoria basica", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu3.AppendItem( self.m_menuItem7 )
+        
+        self.m_menuItem8 = wx.MenuItem( self.m_menu3, wx.ID_ANY, u"Contacto", wx.EmptyString, wx.ITEM_NORMAL )
+        self.m_menu3.AppendItem( self.m_menuItem8 )
+        
+        self.m_menubar1.Append( self.m_menu3, u"Ayuda" ) 
+        
+        self.SetMenuBar( self.m_menubar1 )
+        
+        gSizer7 = wx.GridSizer( 4, 1, 0, 0 )
+        
+        bSizer14 = wx.BoxSizer( wx.VERTICAL )
+        
+        sbSizer12 = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, u"Modelo \n" ), wx.VERTICAL )
+        
+        gSizer26 = wx.GridSizer( 2, 1, 0, 0 )
+        
+        bSizer82 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText22 = wx.StaticText( sbSizer12.GetStaticBox(), wx.ID_ANY, u"Este proceso puede tardar. Dependiendo de la muestra  y el equipo en el que se corra.", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText22.Wrap( -1 )
+        bSizer82.Add( self.m_staticText22, 0, wx.RIGHT|wx.LEFT|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+        
+        
+        gSizer26.Add( bSizer82, 1, wx.EXPAND, 5 )
+        
+        bSizer83 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer27 = wx.GridSizer( 1, 2, 0, 0 )
+        
+        bSizer84 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText23 = wx.StaticText( sbSizer12.GetStaticBox(), wx.ID_ANY, u"Nombre del modelo:", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText23.Wrap( -1 )
+        bSizer84.Add( self.m_staticText23, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+        
+        
+        gSizer27.Add( bSizer84, 1, wx.EXPAND, 5 )
+        
+        bSizer85 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Nombre_modelo = wx.TextCtrl( sbSizer12.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer85.Add( self.Nombre_modelo, 1, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        gSizer27.Add( bSizer85, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer83.Add( gSizer27, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer26.Add( bSizer83, 1, wx.EXPAND, 5 )
+        
+        
+        sbSizer12.Add( gSizer26, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer14.Add( sbSizer12, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer7.Add( bSizer14, 1, wx.EXPAND, 5 )
+        
+        bSizer16 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer16 = wx.GridSizer( 2, 1, 0, 0 )
+        
+        bSizer50 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText24 = wx.StaticText( self, wx.ID_ANY, u"Clasificacion de modelo atravez de la tecnica Maquina de soporte vectorial", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText24.Wrap( -1 )
+        bSizer50.Add( self.m_staticText24, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+        
+        
+        gSizer16.Add( bSizer50, 1, wx.EXPAND, 5 )
+        
+        bSizer51 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer28 = wx.GridSizer( 1, 2, 0, 0 )
+        
+        bSizer86 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.m_staticText26 = wx.StaticText( self, wx.ID_ANY, u"El comentario es ", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.m_staticText26.Wrap( -1 )
+        bSizer86.Add( self.m_staticText26, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+        
+        
+        gSizer28.Add( bSizer86, 1, wx.EXPAND, 5 )
+        
+        bSizer87 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Texto_A_Clasificar = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer87.Add( self.Texto_A_Clasificar, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer28.Add( bSizer87, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer51.Add( gSizer28, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer16.Add( bSizer51, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer16.Add( gSizer16, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer7.Add( bSizer16, 1, wx.EXPAND, 5 )
+        
+        bSizer18 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Clasificacion_total = wx.TextCtrl( self, wx.ID_ANY, u"El resultado aparecera aqui", wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer18.Add( self.Clasificacion_total, 1, wx.ALL|wx.EXPAND|wx.ALIGN_RIGHT, 5 )
+        
+        
+        gSizer7.Add( bSizer18, 1, wx.EXPAND, 5 )
+        
+        bSizer19 = wx.BoxSizer( wx.VERTICAL )
+        
+        gSizer14 = wx.GridSizer( 1, 3, 0, 0 )
+        
+        bSizer40 = wx.BoxSizer( wx.VERTICAL )
+        
+        sbSizer23 = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, u"Estado del programa" ), wx.VERTICAL )
+        
+        self.Porcentaje = wx.TextCtrl( sbSizer23.GetStaticBox(), wx.ID_ANY, u"Esperando ejecucion", wx.DefaultPosition, wx.DefaultSize, 0 )
+        sbSizer23.Add( self.Porcentaje, 0, wx.ALL|wx.EXPAND, 5 )
+        
+        self.Barrita = wx.Gauge( sbSizer23.GetStaticBox(), wx.ID_ANY, 100, wx.DefaultPosition, wx.DefaultSize, wx.GA_HORIZONTAL )
+        self.Barrita.SetValue( 0 ) 
+        sbSizer23.Add( self.Barrita, 0, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        bSizer40.Add( sbSizer23, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer14.Add( bSizer40, 1, wx.EXPAND, 5 )
+        
+        bSizer41 = wx.BoxSizer( wx.VERTICAL )
+        
+        
+        gSizer14.Add( bSizer41, 1, wx.EXPAND, 5 )
+        
+        bSizer42 = wx.BoxSizer( wx.VERTICAL )
+        
+        self.Iniciar_Proceso = wx.Button( self, wx.ID_ANY, u"Iniciar Proceso", wx.DefaultPosition, wx.DefaultSize, 0 )
+        bSizer42.Add( self.Iniciar_Proceso, 1, wx.ALL|wx.EXPAND, 5 )
+        
+        
+        gSizer14.Add( bSizer42, 1, wx.EXPAND, 5 )
+        
+        
+        bSizer19.Add( gSizer14, 1, wx.EXPAND, 5 )
+        
+        
+        gSizer7.Add( bSizer19, 1, wx.EXPAND, 5 )
+        
+        
+        self.SetSizer( gSizer7 )
+        self.Layout()
+        
+        self.Centre( wx.BOTH )
+        
+        # Connect Events
+        self.Bind( wx.EVT_MENU, self.Limpiar_texto, id = self.m_menuItem1.GetId() )
+        self.Bind( wx.EVT_MENU, self.Vectorizacion_modelo, id = self.m_menuItem2.GetId() )
+        self.Bind( wx.EVT_MENU, self.Valor_numerico_vector, id = self.m_menuItem3.GetId() )
+        self.Bind( wx.EVT_MENU, self.Generar_modelo, id = self.m_menuItem4.GetId() )
+        self.Bind( wx.EVT_MENU, self.Clasificar, id = self.m_menuItem5.GetId() )
+        self.Bind( wx.EVT_MENU, self.Especificaciones_modelo, id = self.m_menuItem6.GetId() )
+        self.Bind( wx.EVT_MENU, self.Teoria_basica, id = self.m_menuItem7.GetId() )
+        self.Bind( wx.EVT_MENU, self.Contacto, id = self.m_menuItem8.GetId() )
+        self.Iniciar_Proceso.Bind( wx.EVT_BUTTON, self.next )
+    
+    def __del__( self ):
+        pass
+    
+    
+    # Virtual event handlers, overide them in your derived class
+    def Limpiar_texto( self, event ):
+        Seleccion_de_Ventanas(1)
+        self.Destroy()
+    
+    def Vectorizacion_modelo( self, event ):
+        Seleccion_de_Ventanas(2)
+        self.Destroy()
+    
+    def Valor_numerico_vector( self, event ):
+        Seleccion_de_Ventanas(3)
+        self.Destroy()
+    
+    def Generar_modelo( self, event ):
+        Seleccion_de_Ventanas(4)
+        self.Destroy()
+    
+    def Clasificar( self, event ):
+        Seleccion_de_Ventanas(5)
+        self.Destroy()
+    
+    def Especificaciones_modelo( self, event ):
+        Seleccion_de_Ventanas(6)
+        self.Destroy()
+    
+    def Teoria_basica( self, event ):
+        Seleccion_de_Ventanas(7)
+        self.Destroy()
+    
+    def Contacto( self, event ):
+        Seleccion_de_Ventanas(8)
+        self.Destroy()
+    
+    def onClose(self,event):
+        Mata_Programa_Definitivo(False)
+        print j
+        self.Destroy()
+    
+    def next( self, event ):
+        print "Next"
+        a=self.Nombre_modelo.GetValue()
+        a=a+".p"
+        modelo = pickle.load( open( a, "rb" ) )
+        self.Porcentaje.SetValue("Iniciando ...")
+        self.Barrita.SetValue(20)
+        texto=self.Texto_A_Clasificar.GetValue()
+        print type(texto)
+        texto=str(texto)
+        print type(texto)
+        texto=cleaning_text(texto)
+        texto=getWordNgrams(texto, 1)
+    
+        tempora  = []
+        for item in texto:
+            ngramCounter = Counter(item)          
+            tempora.append(dict(ngramCounter))
+        vectorizer = DictVectorizer()
+        y = vectorizer.fit_transform(texto)
+        y = normalize(y,norm='l2')
+        
+        print "Antes de modelo"
+        nada=modelo.predict(texto)
+        print "despues de modelo"
+        self.Clasificacion_total.SetValue(nada)
+        self.Porcentaje.SetValue("Finalizado ...")
+        self.Barrita.SetValue(100)
+        event.Skip()
+    
 '''
 $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 $$                        Funcion Principal                                                   $$
@@ -692,6 +1570,12 @@ if __name__ == '__main__':
             fr= Objeto1(None)
         elif i==2:
             fr=Objeto2(None)
+        elif i==3:
+            fr=Objeto3(None)
+        elif i==4:
+            fr=Objeto4(None)
+        elif i==5:
+            fr=Objeto5(None)
         app.MainLoop(None)
     pass
     

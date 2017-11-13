@@ -20,6 +20,7 @@ import numpy as np
 from WordNgrams import getWordNgrams
 from distributed.bokeh.status.main import doc
 from openpyxl.styles.builtins import total
+from blaze.expr.expressions import shape
 #from quitanexos import conjunciones
 LabeledSentence = gensim.models.doc2vec.LabeledSentence
 global x
@@ -251,18 +252,35 @@ def machineLearning_scikit(train,train_tar,test,test_tar):
     clf.fit(train, train_tar)
     score = liblinear.score(test, test_tar)
     score2 = clf.score(test, test_tar)
+    print test
+    print type(test)
     print "Liblinear: "+str(score)
     print(liblinear.predict(test))
-    print "SVC: "+str(score2)
-    print(clf.predict(test))
+    print type(liblinear.predict(test))
+    #print "SVC: "+str(score2)
+    #print(clf.predict(test))
+    return score,score2,liblinear,clf
 #################################################################################################
-#train_files,target = conseguir_todos_los_archivos("C:/TECUAPAN2")
-#test_files,target2 = conseguir_todos_los_archivos("C:/TECUAPAN2")
-#train_data,test_data = read_corpus(train_files,test_files)
-#print train_data
-#print "Dimension de vector "+str(len(train_data))
-#print "Dimension de vector2 "+str(len(train_data))
-
+'''
+train_files,target = conseguir_todos_los_archivos("C:/Users/tecuapan/Pictures/AA")
+test_files,target2 = conseguir_todos_los_archivos("C:/Users/tecuapan/Pictures/AAA")
+train_data,test_data = read_corpus(train_files,test_files)
+print train_data
+print "Dimension de vector "+str(len(train_data))
+print "Dimension de vector2 "+str(len(train_data))
+'''
+#################################################
+#print cleaning_text("That is a from Chiness")
+'''
+train_data = getWordNgrams(train_data, 1)
+test_data = getWordNgrams(test_data, 1)
+print train_data
+print test_data
+train,train_tar,test,test_tar,features = parse_corpus(train_data,test_data,target,target2)
+print train
+print shape(train)
+print shape(test)
+'''
 '''
 print "Inicio"
 Generacion_texto_limpiado_pre("C:/tecuapan", "C:/TECUAPAN2")
@@ -276,9 +294,21 @@ if __name__ == '__main__':
     print "Texto sucio "+str(a)
     print "Texto limpio "+str(b)
 '''    
-'''
+if __name__ == '__main__':
+    '''
     trainpath = "C:\TECUAPAN2"
     testpath = "C:\TECUAPAN2"
+    mamamda="Julie Andrews satirically prods her own goodytwoshoes image in this overproduced musical comedydrama  if she approaches her role aplomb  she's alone in doing  Blake Edwards' film woman who is both musichall entertainer German spy WWI doesn't know what tone aim  Rock Hudson has the thankless task playing romantic secondfiddle  Musicals had grown  favor 1970  elephantine productions like Star  this film really tarnished Andrews' reputation  leaving lot dead space in her catalogue The Tamarind Seed came along  I've always thought Julie Andrews would've made great villain shady lady  her strong voice could really command attention  she hits some low notes that can either be imposing seductive  Husband/director Edwards seems realize this  neither he nor Julie can work much energy within this scenario  Screenwriter William Peter Blatty isn't good partner Edwards  neither man has his heart in this material  Beatty's script offers Andrews just one fabulous sequencea striptease  *1/2 ****"
+    mamamda=cleaning_text(mamamda)
+    mamamda=getWordNgrams(mamamda, 1)
+    
+    tempora  = []
+    for item in mamamda:
+        ngramCounter = Counter(item)          
+        tempora.append(dict(ngramCounter))
+    vectorizer = DictVectorizer()
+    y = vectorizer.fit_transform(tempora)
+    y = normalize(y,norm='l2')
     
     #limpia_corpus(trainpath)
     #limpia_corpus(testpath)
@@ -296,7 +326,10 @@ if __name__ == '__main__':
     #test_data = cleanText(test_data)
        
     train,train_tar,test,test_tar,features = parse_corpus(train_data,test_data,target,target2)
-    machineLearning_scikit(train,train_tar,test,test_tar)
-
+    a,b,c,d=machineLearning_scikit(train,train_tar,test,test_tar)
+    test = normalize(test,norm='l2')                                                                                            
     print "Programa terminado"
-'''
+    print type(c.predict(test))
+    print (c.predict(test))
+    print "Programa terminado"
+    '''
